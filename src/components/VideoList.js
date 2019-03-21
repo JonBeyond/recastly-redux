@@ -1,22 +1,25 @@
 import React from 'react';
 import VideoListEntry from './VideoListEntry.js';
 
-var VideoList = ({videos, handleVideoListEntryTitleClick}) => (
+import { connect } from 'react-redux';
+//All we need to do is connect tthe mapState function and provide it the videos for use:
+const mapStateToProps = (state) => {
+  return {
+    videos: state.videos
+  };
+};
+
+var VideoList = ({videos}) => (
   <div className="video-list">
     {
       videos.map(video => (
         <VideoListEntry
           key={video.etag}
           video={video}
-          handleVideoListEntryTitleClick={handleVideoListEntryTitleClick}
         />
       ))
     }
   </div>
 );
 
-VideoList.propTypes = {
-  videos: React.PropTypes.array.isRequired
-};
-
-export default VideoList;
+export default connect(mapStateToProps)(VideoList);
