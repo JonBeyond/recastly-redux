@@ -1,5 +1,14 @@
 import React from 'react';
 
+//import connect and map the state:
+import { connect } from 'react-redux';
+const mapStateToProps = ({currentVideo}) => {
+  return {
+    video: currentVideo,
+  };
+};
+//no dispatch is needed here
+
 var VideoPlayer = ({video}) => (
   !video
     ? <div className="video-player">Please wait...</div>
@@ -14,10 +23,4 @@ var VideoPlayer = ({video}) => (
     </div>
 );
 
-// PropTypes tell other developers what `props` a component expects
-// Warnings will be shown in the console when the defined rules are violated
-VideoPlayer.propTypes = {
-  video: React.PropTypes.object.isRequired
-};
-
-export default VideoPlayer;
+export default connect(mapStateToProps)(VideoPlayer);

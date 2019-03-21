@@ -1,5 +1,20 @@
 import React from 'react';
 
+//we need to interact with the changeVideo action here
+import changeVideo from '../actions/currentVideo.js';
+import { connect } from 'react-redux';
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleVideoListEntryTitleClick: (video) => dispatch(changeVideo(video)),
+  };
+};
+
+const mapStateToProps = () => {
+  return {};
+};
+
+
 var VideoListEntry = ({video, handleVideoListEntryTitleClick}) => (
   <div className="video-list-entry">
     <div className="media-left media-middle">
@@ -21,4 +36,5 @@ VideoListEntry.propTypes = {
   video: React.PropTypes.object.isRequired
 };
 
-export default VideoListEntry;
+//and connect the dispatch:
+export default connect(mapStateToProps, mapDispatchToProps)(VideoListEntry);
